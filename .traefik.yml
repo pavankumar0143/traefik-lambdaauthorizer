@@ -1,0 +1,21 @@
+displayName: Lambda Authorizer Middleware
+description: >
+  A Traefik plugin that authorizes request and adds authorizer context to requestContext.authorizer.lambda if authorized or returns 401 if not authorized.
+  Only supports lambda running in local environment. For local development, this plugin is required to be used in conjunction with lambdarequesttransformer plugin.
+type: middleware
+summary: Authorizes request and adds authorizer context to requestContext.authorizer.lambda if authorized or returns 401 if not authorized.
+
+import: github.com/pavankumar0143/traefik-lambdaauthorizer
+testData:
+  request:
+    method: POST
+    path: /mock
+    headers:
+      x-session-id: test-session-id
+    body: |
+      {
+        "version": "2.0",
+        "requestContext": {}
+      }
+  expected:
+    code: 200
